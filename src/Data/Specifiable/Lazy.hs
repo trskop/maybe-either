@@ -15,10 +15,12 @@ import Control.Applicative (Applicative((<*>), pure), Alternative((<|>), empty))
 import Control.Monad (Monad((>>=), return), MonadPlus(mzero, mplus))
 import Data.Data (Data, Typeable, typeRep)
 import Data.Either (Either(Left, Right))
+import Data.Eq (Eq)
 import Data.Function (($), (.))
 import Data.Functor (Functor(fmap), (<$>), (<$))
 import Data.Maybe (Maybe(Just, Nothing))
 import Data.Monoid (Monoid(mappend, mempty))
+import Data.Ord (Ord)
 import Data.Proxy (Proxy(Proxy))
 import Data.Semigroup (Semigroup((<>)))
 import GHC.Generics (Generic, Generic1)
@@ -55,7 +57,7 @@ data Specifiable a b
 
     | Imprecise a
     | Specific b
-  deriving (Data, Generic, Generic1, Show, Read, Typeable)
+  deriving (Data, Eq, Generic, Generic1, Ord, Show, Read, Typeable)
 
 instance Functor (Specifiable a) where
     fmap f = \case
